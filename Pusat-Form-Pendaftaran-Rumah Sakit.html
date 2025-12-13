@@ -29,7 +29,7 @@
                 
                 <div class="form-group">
                     <label for="nik">NIK (Nomor Induk Kependudukan)</label>
-                    <input type="text" id="nik" name="nik" placeholder="Masukkan 16 digit NIK Anda" required pattern="[0-9]{16}" minlength="16" maxlength="16" title="NIK harus 16 digit angka">
+                    <input type="number" id="nik" name="nik" placeholder="Masukkan 16 digit NIK Anda" required minlength="16" maxlength="16" title="NIK harus 16 digit angka">
                 </div>
 
                 <div class="form-group">
@@ -81,7 +81,7 @@
                     <textarea id="keluhan" name="keluhan" rows="4"></textarea>
                 </div>
                 
-                <button type="button" id="submitBtn" class="btn-daftar-nav">Kirim Pendaftaran via WhatsApp</button>
+                <button type="button" id="submitBtn" class="btn-daftar-nav submit-btn">Kirim Pendaftaran via WhatsApp</button>
             </form>
         </div>
     </main>
@@ -89,12 +89,12 @@
     <script>
         document.getElementById('submitBtn').addEventListener('click', function() {
             // Ambil nilai dari form
-            const nama = document.getElementById('nama').value;
-            const nik = document.getElementById('nik').value;
+            const nama = document.getElementById('nama').value.trim();
+            const nik = document.getElementById('nik').value.trim();
             const faskes = document.getElementById('faskes').value;
             const poli = document.getElementById('poli').value;
             const tanggal = document.getElementById('tanggal').value;
-            const keluhan = document.getElementById('keluhan').value || "Tidak ada";
+            const keluhan = document.getElementById('keluhan').value.trim() || "Tidak ada";
 
             // Ambil nilai dari checkbox (Tipe Kunjungan)
             const checkboxes = document.querySelectorAll('input[name="tipeKunjungan"]:checked');
@@ -106,12 +106,13 @@
                 alert("Mohon lengkapi semua kolom wajib.");
                 return;
             }
+            // Perbaikan validasi NIK agar tidak mengizinkan non-digit (walaupun type="number")
             if (nik.length !== 16 || !/^\d+$/.test(nik)) {
                  alert("NIK harus berupa 16 digit angka.");
                  return;
             }
 
-            // Format Pesan WhatsApp
+            // Format Pesan WhatsApp (menggunakan encodeURIComponent untuk karakter khusus)
             const message = 
                 `*FORM PENDAFTARAN PASIEN ONLINE RSU KARINA MEDIKA*%0A%0A` +
                 `*Data Pasien:*%0A` +
@@ -124,8 +125,8 @@
                 `Keluhan Singkat: ${keluhan}%0A%0A` +
                 `_Mohon tunggu konfirmasi dari petugas kami._`;
 
-            // Nomor Tujuan WhatsApp
-            const phoneNumber = '6282261977771'; // Menggunakan format internasional (62)
+            // Nomor Tujuan WhatsApp (Pastikan ini adalah nomor yang benar)
+            const phoneNumber = '6282261977771'; 
 
             // Buat link WhatsApp
             const waLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
