@@ -2,15 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Menu Toggle untuk Mobile ---
     const menuToggle = document.querySelector('.menu-toggle');
     const navWrapper = document.querySelector('.nav-wrapper'); 
+    const headerElement = document.querySelector('.header'); // Ambil elemen header
 
-    if (menuToggle && navWrapper) {
+    if (menuToggle && navWrapper && headerElement) {
         menuToggle.addEventListener('click', () => {
             navWrapper.classList.toggle('active');
             // Ganti ikon toggle
             const icon = menuToggle.querySelector('i');
             if (navWrapper.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times'); // Ikon Tutup
+                icon.classList.add('fa-times'); // Ikon Tutup (X)
             } else {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
@@ -19,21 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 2. Scroll Animation (Intersecting Observer) ---
-    // Dipindahkan ke dalam fungsi untuk memastikan hanya berjalan setelah DOMContentLoaded
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                // Hentikan pengamatan setelah elemen terlihat
                 observer.unobserve(entry.target);
             }
         });
     }, {
         rootMargin: '0px',
-        threshold: 0.1 // Mulai muncul saat 10% elemen terlihat
+        threshold: 0.1 
     });
 
-    // Amati semua elemen dengan class 'animate-on-scroll'
     document.querySelectorAll('.animate-on-scroll').forEach(section => {
         observer.observe(section);
     });
@@ -43,14 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (targetId && targetId !== '#') {
-                e.preventDefault(); // Mencegah lompatan langsung
+                e.preventDefault(); 
                 
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    // Hitung posisi scroll dengan mempertimbangkan sticky header
-                    const headerHeight = document.querySelector('.header').offsetHeight || 70;
-                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    const headerHeight = headerElement ? headerElement.offsetHeight : 70; // Pastikan header ada
+                    const targetPosition = targetElement.offsetTop - headerHeight + 1; // Tambah 1px agar tidak menempel
 
                     window.scrollTo({
                         top: targetPosition,
@@ -60,51 +57,53 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Tutup menu mobile setelah klik
                     if (navWrapper && navWrapper.classList.contains('active')) {
                         navWrapper.classList.remove('active');
-                        document.querySelector('.menu-toggle i').classList.remove('fa-times');
-                        document.querySelector('.menu-toggle i').classList.add('fa-bars');
+                        // Pastikan ikon kembali ke fa-bars
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
                     }
                 }
             }
         });
     });
 
-    // --- 4. Logic "Lihat Lainnya" Dokter (Telah diperbaiki & dioptimalkan) ---
+    // --- 4. Logic "Lihat Lainnya" Dokter ---
     const btnLihatLain = document.getElementById('lihat-dokter-lain');
     const dokterLainnyaContainer = document.getElementById('dokter-lainnya');
     
+    // Data tambahan telah dirapikan (menghapus koma berlebihan)
     const additionalDoctors = [
         {
             img: "dr rudi.png", 
             nama: "dr. R.Rudi Ruhikmat, Sp.B",
             spesialisasi: "Spesialis Bedag",
-            jadwal: "Senin-jum'at"
+            jadwal: "Senin-Jum'at"
         },
         {
             img: "dr huda.png", 
             nama: "dr. Huda Toriq, Sp.OG",
             spesialisasi: "Spesialis Kandungan Kebidanan",
-            jadwal: "Senin-jum'at"
+            jadwal: "Senin-Jum'at"
         },
         {
             img: "dr intan.png", 
             nama: "dr Annisa Intan Sari Tamara",
             spesialisasi: "Dokter Umum",
             jadwal: "Setiap Hari"
-        }, // Koma ditambahkan di sini
+        }, 
         {
             img: "dr irham.png", 
             nama: "dr Irham Rahmanurrijal",
             spesialisasi: "Dokter Umum",
             jadwal: "Setiap Hari"
         }
-        // Koma yang berlebihan dihapus dari baris 87
     ];
 
     if (btnLihatLain && dokterLainnyaContainer) {
         // Fungsi untuk membuat HTML card dokter
         const createDoctorCard = (dokter) => {
             return `
-                <div class="dokter-card animate-on-scroll is-visible">
+                <div class="dokter-card animate-on-scroll">
                     <img src="${dokter.img}" alt="${dokter.nama}">
                     <h4>${dokter.nama}</h4>
                     <p>${dokter.spesialisasi}</p>
@@ -124,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnLihatLain.innerHTML = "Sembunyikan Dokter"; 
             } else {
                 btnLihatLain.innerHTML = "Lihat Dokter Lainnya"; 
-                // Konten akan hilang setelah transisi CSS selesai (karena max-height menjadi 0)
+                // Konten hilang setelah transisi CSS (800ms)
                 setTimeout(() => {
                      dokterLainnyaContainer.innerHTML = '';
                 }, 800); 
@@ -132,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 5. Emergency Trigger (Opsional: Alert sederhana) ---
+    // --- 5. Emergency Trigger (Alert sederhana) ---
     document.querySelectorAll('.emergency-trigger').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
