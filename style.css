@@ -22,6 +22,7 @@ body {
     color: var(--text-dark);
     background-color: #f7f9f7;
     line-height: 1.6;
+    margin-bottom: 60px; /* Tinggi footer mengambang */
 }
 
 /* Kunci Utama: Kontainer Terpusat & Simetris */
@@ -29,25 +30,26 @@ body {
     max-width: 1200px;
     margin: 0 auto; /* Memastikan konten terpusat */
     padding: 0 20px;
-    width: 100%; /* Penting untuk responsif */
+    width: 100%; 
 }
 
 /* Gaya Section Umum untuk Kerapihan */
 section {
     padding: var(--section-padding);
-    text-align: center; /* Memastikan elemen blok di dalamnya terpusat */
+    /* Hapus text-align: center di sini, pindahkan ke h2/h3 agar paragraf tidak terpusat */
 }
 
 section h2, section h3, section h4 {
     color: var(--primary-color);
     margin-bottom: 40px;
     font-weight: 700;
+    text-align: center; /* Dipindahkan ke sini */
 }
 
 /* --- Header & Navbar --- */
 .header {
-    background-color:#65cc84;
-    border-bottom: 2px solid var(--secondary-color);
+    background-color: var(--secondary-color); /* Warna disesuaikan dengan tema */
+    border-bottom: 2px solid var(--primary-color);
     padding: 10px 20px;
     display: flex;
     justify-content: space-between; 
@@ -61,16 +63,23 @@ section h2, section h3, section h4 {
 .logo {
     display: flex;
     align-items: center;
-    font-size: 0.9em; /* Dikecilkan agar tidak terlalu memakan tempat di desktop */
+    font-size: 1em; 
     font-weight: bold;
-    color:#333;
+    color: var(--text-dark);
     flex-shrink: 0;
     text-align: left;
+    max-width: 50%; /* Batasi lebar logo agar tidak memakan ruang tombol */
 }
 
 .logo img {
     height: 40px;
     margin-right: 10px;
+}
+
+.logo h4 {
+    margin: 0; /* Hapus margin default h4 di dalam logo */
+    font-size: 1em;
+    font-weight: 500;
 }
 
 /* Wrapper Navigasi */
@@ -98,9 +107,8 @@ section h2, section h3, section h4 {
 
 /* Efek Hover */
 .nav-item:hover, .dropdown:hover .dropbtn {
-    text-decoration-color: #ddd;
-    color: #fdfffe;
-    background-color: #55A86E; 
+    color: var(--text-light);
+    background-color: var(--primary-color); 
     transform: translateY(-1px); 
 }
 
@@ -116,7 +124,7 @@ section h2, section h3, section h4 {
     top: 100%; 
     left: 0;
     background-color: var(--text-light);
-    min-width: 200px;
+    min-width: 220px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-top: 3px solid var(--primary-color);
@@ -133,6 +141,7 @@ section h2, section h3, section h4 {
 
 .dropdown-content a:hover {
     background-color: var(--secondary-color);
+    color: var(--text-dark);
 }
 
 .dropdown:hover .dropdown-content {
@@ -143,8 +152,8 @@ section h2, section h3, section h4 {
 .btn-daftar-nav, .btn-primary {
     background-color: var(--primary-color);
     color: var(--text-light) !important;
-    padding: 10px 25px; /* Padding disamakan */
-    border-radius: 25px; /* Bentuk pill/bulat */
+    padding: 10px 25px; 
+    border-radius: 25px; 
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
     transition: all var(--transition-speed);
@@ -170,7 +179,7 @@ section h2, section h3, section h4 {
 /* --- Bagian Gambar Utama RS --- */
 .hospital-main-image {
     width: 100%;
-    height: 450px; /* Ditingkatkan sedikit */
+    height: 450px; 
     overflow: hidden;
     position: relative;
 }
@@ -200,16 +209,19 @@ section h2, section h3, section h4 {
     justify-content: center;
     gap: 30px;
     margin-top: 30px;
+    flex-wrap: wrap; /* Pastikan responsif pada ukuran menengah */
 }
 
 .unggulan-item {
     flex: 1;
-    max-width: 250px;
+    min-width: 200px; /* Lebar minimum untuk item unggulan */
+    max-width: 300px;
     padding: 30px 20px;
     background-color: var(--text-light);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     transition: transform var(--transition-speed);
+    text-align: center;
 }
 
 .unggulan-item:hover {
@@ -226,6 +238,7 @@ section h2, section h3, section h4 {
     display: block;
     font-weight: bold;
     margin-top: 10px;
+    color: var(--primary-color);
 }
 
 /* --- Layanan Section (Flexbox Rapi) --- */
@@ -236,24 +249,26 @@ section h2, section h3, section h4 {
     border-radius: 10px;
     background-color: var(--text-light);
     text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .layanan-box h4 {
     margin-bottom: 20px;
     border-bottom: 2px solid var(--secondary-color);
     padding-bottom: 10px;
+    text-align: left; /* Teks heading di dalam box rata kiri */
 }
 
 .layanan-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Jarak antar item */
-    justify-content: flex-start; /* Item mulai dari kiri */
+    gap: 10px; 
+    justify-content: flex-start; 
 }
 
 .layanan-grid span {
-    flex: 1 1 calc(25% - 10px); /* 4 kolom di desktop */
-    min-width: 180px; /* Lebar minimum */
+    flex: 1 1 calc(25% - 10px); 
+    min-width: 180px; 
     background-color: var(--tertiary-color);
     padding: 12px 15px;
     border-radius: 5px;
@@ -270,6 +285,7 @@ section h2, section h3, section h4 {
 
 .layanan-grid span:hover {
     background-color: var(--secondary-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* --- Rawat Inap Section (Grid Rapi) --- */
@@ -291,6 +307,8 @@ section h2, section h3, section h4 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     text-align: center;
     transition: transform var(--transition-speed);
+    display: flex;
+    flex-direction: column;
 }
 
 .inap-card:hover {
@@ -307,17 +325,13 @@ section h2, section h3, section h4 {
 
 .inap-card span {
     display: block;
-    padding: 10px;
+    padding: 15px 10px; /* Padding lebih besar */
     font-weight: bold;
     color: var(--primary-color);
-}
-
-.nebulizer-container {
-    position: relative;
-    width: 200px;
-    height: 300px;
-    margin: auto;
-    /* Tambahkan gaya lain untuk tampilan wadah jika perlu */
+    flex-grow: 1; /* Agar tinggi kartu konsisten */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* --- Dokter Section (Grid Rapi + Hidden) --- */
@@ -333,13 +347,13 @@ section h2, section h3, section h4 {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     overflow: hidden;
-    max-height: 0; /* Awalnya tersembunyi */
-    transition: max-height 0.8s ease-in-out; /* Transisi untuk 'Lihat Lainnya' */
+    max-height: 0; 
+    transition: max-height 0.8s ease-in-out; 
     margin-top: 30px;
 }
 
 .dokter-grid-hidden.expanded {
-    max-height: 2000px; /* Cukup besar untuk menampung konten */
+    max-height: 2000px; 
 }
 
 .dokter-card {
@@ -348,6 +362,11 @@ section h2, section h3, section h4 {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     text-align: center;
+    transition: transform var(--transition-speed);
+}
+
+.dokter-card:hover {
+    transform: translateY(-3px);
 }
 
 .dokter-card img {
@@ -360,6 +379,7 @@ section h2, section h3, section h4 {
 }
 
 .dokter-card h4 {
+    margin-top: 0;
     margin-bottom: 5px;
     color: var(--text-dark);
 }
@@ -368,6 +388,13 @@ section h2, section h3, section h4 {
     margin-bottom: 5px;
     color: var(--primary-color);
     font-weight: 600;
+}
+
+.dokter-card .jadwal-info {
+    font-weight: 500;
+    color: var(--text-dark);
+    font-style: italic;
+    margin-bottom: 15px;
 }
 
 .dokter-card button {
@@ -403,7 +430,8 @@ section h2, section h3, section h4 {
 .video-placeholder {
     position: relative;
     width: 100%;
-    height: 400px; /* Ukuran placeholder */
+    height: 400px; 
+    background-color: #e0e0e0;
 }
 
 .video-placeholder img {
@@ -414,13 +442,28 @@ section h2, section h3, section h4 {
 
 .view-options {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.6);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
     color: var(--text-light);
-    padding: 5px 10px;
+    padding: 10px 20px;
     border-radius: 5px;
-    font-size: 0.9em;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.view-options span {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border: 1px solid var(--text-light);
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+.view-options span:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .galeri-mini-grid {
@@ -431,23 +474,29 @@ section h2, section h3, section h4 {
 }
 
 .galeri-item {
-    flex: 1 1 30%; /* 3 item per baris */
+    flex: 1 1 30%; 
     max-width: 350px;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform var(--transition-speed);
+}
+.galeri-item:hover {
+     transform: scale(1.03);
 }
 
 .galeri-item img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    display: block;
 }
 
 .galeri-item p {
     padding: 10px;
     background-color: var(--text-light);
     font-weight: 500;
+    margin: 0;
 }
 
 /* --- Lokasi Section --- */
@@ -455,6 +504,7 @@ section h2, section h3, section h4 {
     max-width: 600px;
     margin: 0 auto 30px auto;
     font-weight: 500;
+    text-align: center;
 }
 
 .map-box {
@@ -479,6 +529,7 @@ section h2, section h3, section h4 {
     text-decoration: none;
     font-weight: bold;
     transition: background-color var(--transition-speed);
+    text-align: center;
 }
 
 .btn-map:hover {
@@ -498,11 +549,6 @@ section h2, section h3, section h4 {
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
     padding: 10px 0;
     z-index: 900;
-    /* Tambahkan margin-bottom pada body agar tidak tertutup footer */
-}
-
-body {
-    margin-bottom: 60px; /* Tinggi footer */
 }
 
 .footer-item {
@@ -514,6 +560,7 @@ body {
     font-size: 0.8em;
     font-weight: 500;
     transition: color var(--transition-speed);
+    padding: 0 5px; /* Tambahkan padding agar tidak terlalu mepet di mobile */
 }
 
 .footer-item i {
@@ -529,7 +576,7 @@ body {
 /* --- Form Pendaftaran Khusus --- */
 .form-page-body {
     background-color: var(--tertiary-color);
-    margin-bottom: 0 !important; /* Hapus margin body di halaman form */
+    margin-bottom: 0 !important; 
 }
 .form-container {
     max-width: 700px; 
@@ -576,7 +623,7 @@ body {
     padding: 15px;
     border-radius: 5px;
     background-color: var(--tertiary-color);
-    display: flex; /* Menggunakan Flexbox untuk Checkbox */
+    display: flex; 
     flex-wrap: wrap;
     gap: 15px;
 }
@@ -608,6 +655,7 @@ body {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
+    transition: background-color 0.3s;
 }
 .emergency-button:hover {
     background-color: #2980b9;
@@ -649,7 +697,14 @@ body {
 
 @media (max-width: 1024px) {
     .layanan-grid span {
-        flex: 1 1 calc(33.33% - 10px); /* 3 kolom di tablet besar */
+        flex: 1 1 calc(33.33% - 10px); 
+        min-width: 150px;
+    }
+    .rawat-inap-grid { 
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+    }
+    .dokter-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
 
@@ -658,7 +713,10 @@ body {
     .header {
         padding: 10px 15px;
     }
-    .logo span {
+    .logo {
+        max-width: 60%;
+    }
+    .logo h4 {
         font-size: 0.9em;
     }
 
@@ -667,7 +725,7 @@ body {
         display: none; 
         flex-direction: column;
         position: absolute;
-        top: 60px; 
+        top: 62px; /* Disesuaikan dengan tinggi header */
         right: 0;
         width: 100%;
         background-color: var(--text-light);
@@ -688,10 +746,13 @@ body {
     .nav-item, .dropdown {
         width: 100%;
         text-align: left;
-        padding: 12px 20px;
-        border-bottom: 1px solid var(--tertiary-color);
+        padding: 0; /* Padding dipindahkan ke link di dalam */
         margin: 0;
         border-radius: 0;
+    }
+    .nav-item {
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--tertiary-color);
     }
     .btn-daftar-nav {
         display: block;
@@ -706,9 +767,15 @@ body {
         position: static;
         width: 100%;
         box-shadow: none;
-        padding-left: 20px;
+        padding-left: 0; /* Hapus padding-left untuk konten dropdown */
         border-top: none;
     }
+    .dropdown-content a {
+        padding: 10px 30px; /* Indentasi konten dropdown */
+        background-color: #fcfcfc;
+        border-bottom: 1px solid var(--tertiary-color);
+    }
+
     .menu-toggle {
         display: block;
     }
@@ -721,15 +788,15 @@ body {
         height: 300px; 
     }
     .unggulan-grid {
-        flex-direction: column;
         gap: 20px;
     }
     .unggulan-item {
-        max-width: 90%;
+        max-width: 100%;
         margin: 0 auto;
+        min-width: 90%;
     }
     .layanan-grid span { 
-        flex: 1 1 calc(50% - 10px); /* 2 kolom di mobile */
+        flex: 1 1 calc(50% - 10px); 
         min-width: 0;
         font-size: 0.9em; 
     }
@@ -749,16 +816,26 @@ body {
     .galeri-item img {
         height: 150px;
     }
+    .form-container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
 }
 
 @media (max-width: 480px) {
     .layanan-grid span { 
-        flex: 1 1 100%; /* 1 kolom di mobile kecil */
+        flex: 1 1 100%; 
     }
     .rawat-inap-grid { 
         grid-template-columns: repeat(2, 1fr); 
     }
     .galeri-item {
         flex: 1 1 100%; 
+    }
+    .logo {
+        max-width: 50%;
+    }
+    .logo h4 {
+        font-size: 0.8em;
     }
 }
