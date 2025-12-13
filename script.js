@@ -90,13 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
             nama: "dr Annisa Intan Sari Tamara",
             spesialisasi: "Dokter Umum",
             jadwal: "Setiap Hari"
-        }
+        }, // Koma ditambahkan di sini
         {
             img: "dr irham.png", 
             nama: "dr Irham Rahmanurrijal",
             spesialisasi: "Dokter Umum",
             jadwal: "Setiap Hari"
         }
+        // Koma yang berlebihan dihapus dari baris 87
     ];
 
     if (btnLihatLain && dokterLainnyaContainer) {
