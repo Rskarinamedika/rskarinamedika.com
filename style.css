@@ -7,9 +7,10 @@
     --text-light: #fff;
     --border-color: #ddd;
     --transition-speed: 0.3s;
+    --section-padding: 80px 0; /* Padding konsisten untuk semua section */
 }
 
-/* Reset Dasar */
+/* Reset Dasar & Global */
 * {
     margin: 0;
     padding: 0;
@@ -17,106 +18,110 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-dark);
     background-color: #f7f9f7;
     line-height: 1.6;
 }
 
+/* Kunci Utama: Kontainer Terpusat & Simetris */
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto; /* Memastikan konten terpusat */
     padding: 0 20px;
+    width: 100%; /* Penting untuk responsif */
+}
+
+/* Gaya Section Umum untuk Kerapihan */
+section {
+    padding: var(--section-padding);
+    text-align: center; /* Memastikan elemen blok di dalamnya terpusat */
+}
+
+section h2, section h3, section h4 {
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    font-weight: 700;
 }
 
 /* --- Header & Navbar --- */
 .header {
-    background-color: var(--text-light);
+    background-color:#65cc84;
     border-bottom: 2px solid var(--secondary-color);
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    font-size: 1.2em;
+    font-size: 0.9em; /* Dikecilkan agar tidak terlalu memakan tempat di desktop */
     font-weight: bold;
-    color: var(--primary-color);
+    color:#333;
+    flex-shrink: 0;
+    text-align: left;
 }
 
 .logo img {
-    height: 40px; /* Sesuaikan ukuran logo */
+    height: 40px;
     margin-right: 10px;
 }
 
-.emergency-button {
-    background-color: #ff6b6b; /* Warna Merah untuk Emergency */
-    color: var(--text-light);
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color var(--transition-speed);
-    /* Penyesuaian untuk mobile */
-    font-size: 0.85em; 
-    white-space: nowrap;
+/* Wrapper Navigasi */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
 }
 
-.emergency-button:hover {
-    background-color: #ff4757;
+/* Navigasi Utama (Flex) */
+.navbar {
+    display: flex; 
+    align-items: center;
 }
 
-.navbar a {
+.nav-item {
     text-decoration: none;
     color: var(--text-dark);
-    padding: 10px 15px;
-    transition: color var(--transition-speed), background-color var(--transition-speed);
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-    color: var(--primary-color);
-    background-color: var(--tertiary-color);
-}
-
-/* Gaya Tombol Daftar di Navigasi */
-.btn-daftar-nav {
-    background-color: var(--primary-color);
-    color: var(--text-light) !important;
-    padding: 8px 15px !important;
+    padding: 10px 12px;
     border-radius: 5px;
-    font-weight: bold;
-    margin-left: 15px; /* Memberi jarak dari item nav lain */
-    transition: background-color var(--transition-speed);
+    transition: all var(--transition-speed);
+    font-weight: 500;
+    display: block; 
 }
 
-.btn-daftar-nav:hover {
-    background-color: #438f5a;
-    color: var(--text-light) !important;
+/* Efek Hover */
+.nav-item:hover, .dropdown:hover .dropbtn {
+    text-decoration-color: #ddd;
+    color: #fdfffe;
+    background-color: #55A86E; 
+    transform: translateY(-1px); 
 }
 
-/* Dropdown Menu */
+/* Gaya Dropdown */
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: block; 
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
+    top: 100%; 
+    left: 0;
     background-color: var(--text-light);
     min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-top: 3px solid var(--primary-color);
     animation: fadeIn 0.3s ease-in-out;
+    text-align: left;
 }
 
 .dropdown-content a {
@@ -134,10 +139,38 @@ body {
     display: block;
 }
 
+/* Gaya Tombol Utama (btn-daftar-nav & btn-primary) */
+.btn-daftar-nav, .btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-light) !important;
+    padding: 10px 25px; /* Padding disamakan */
+    border-radius: 25px; /* Bentuk pill/bulat */
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
+    transition: all var(--transition-speed);
+    display: inline-block; 
+    text-decoration: none;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-daftar-nav:hover, .btn-primary:hover {
+    background-color: #438f5a;
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-daftar-nav:active, .btn-primary:active {
+    transform: translateY(0); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #3b7c4d; 
+}
+
 /* --- Bagian Gambar Utama RS --- */
 .hospital-main-image {
     width: 100%;
-    height: 400px; /* Tinggi gambar */
+    height: 450px; /* Ditingkatkan sedikit */
     overflow: hidden;
     position: relative;
 }
@@ -149,78 +182,39 @@ body {
     display: block;
 }
 
-/* --- Bagian Umum --- */
-section {
-    padding: 40px 0;
-}
-
-h2, h3, h4 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-}
-
-/* Tombol */
-.btn-primary {
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color var(--transition-speed);
-    display: block;
-    width: fit-content;
-    margin: 20px auto 0;
-}
-
-.btn-primary:hover {
-    background-color: #438f5a;
-}
-.btn-primary a {
-    color: var(--text-light);
-    text-decoration: none;
-}
-
-/* --- Bagian Profil Singkat --- */
+/* --- Profile Section --- */
 .profile-section p {
-    max-width: 800px;
-    margin: 0 auto 30px;
-    text-align: justify;
-    padding: 20px;
-    background-color: var(--tertiary-color);
-    border-radius: 8px;
-    border-left: 5px solid var(--primary-color);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: justify; /* Teks lebih mudah dibaca */
+    padding: 0 20px;
 }
 
-/* --- Pusat Unggulan --- */
+/* --- Unggulan Section (Grid Rapi) --- */
 .unggulan-section {
-    background-color: var(--text-light);
-    padding: 50px 0;
+    background-color: var(--tertiary-color);
 }
 
 .unggulan-grid {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    text-align: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
 }
 
 .unggulan-item {
-    padding: 30px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: var(--text-light);
     flex: 1;
-    min-width: 200px;
-    cursor: pointer;
-    transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed); /* Peningkatan Transisi */
+    max-width: 250px;
+    padding: 30px 20px;
+    background-color: var(--text-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform var(--transition-speed);
 }
 
 .unggulan-item:hover {
-    transform: translateY(-8px); /* Sedikit lebih tinggi */
-    box-shadow: 0 10px 20px rgba(85, 168, 110, 0.3); /* Shadow berbasis warna primer */
-    background-color: var(--tertiary-color);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .unggulan-item i {
@@ -228,339 +222,399 @@ h2, h3, h4 {
     margin-bottom: 15px;
 }
 
-/* --- Fasilitas & Layanan Boxes --- */
-.layanan-box, .fasilitas-penunjang-section .layanan-grid {
-    margin: 30px 0;
-    padding: 20px;
-    background-color: var(--tertiary-color);
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+.unggulan-item span {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-.layanan-box h4, .fasilitas-penunjang-section h4 {
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 0;
+/* --- Layanan Section (Flexbox Rapi) --- */
+.layanan-box {
+    margin-bottom: 50px;
+    border: 1px solid var(--secondary-color);
+    padding: 30px;
+    border-radius: 10px;
+    background-color: var(--text-light);
+    text-align: left;
+}
+
+.layanan-box h4 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
 }
 
 .layanan-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 15px 0;
+    gap: 10px; /* Jarak antar item */
+    justify-content: flex-start; /* Item mulai dari kiri */
 }
 
 .layanan-grid span {
-    background-color: var(--text-light);
-    border: 1px solid var(--secondary-color);
-    padding: 10px 15px;
+    flex: 1 1 calc(25% - 10px); /* 4 kolom di desktop */
+    min-width: 180px; /* Lebar minimum */
+    background-color: var(--tertiary-color);
+    padding: 12px 15px;
     border-radius: 5px;
-    flex-grow: 1;
-    text-align: center;
-    flex-basis: calc(16.66% - 10px); /* 6 kolom di desktop */
-    /* Peningkatan Transisi Hover */
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease; 
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color var(--transition-speed);
+}
+
+.layanan-grid span i {
+    color: var(--primary-color);
 }
 
 .layanan-grid span:hover {
     background-color: var(--secondary-color);
-    cursor: default;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.layanan-grid i {
-    margin-right: 5px;
-    color: var(--primary-color);
+/* --- Rawat Inap Section (Grid Rapi) --- */
+.rawat-inap-section {
+    background-color: var(--tertiary-color);
 }
 
-/* --- Rawat Inap --- */
 .rawat-inap-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Grid 4 kolom, responsif */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
     gap: 20px;
-    padding-top: 20px;
 }
 
 .inap-card {
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: var(--text-light);
-    cursor: pointer;
-    position: relative;
-    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform var(--transition-speed);
 }
 
 .inap-card:hover {
-    transform: scale(1.05); /* Skala lebih besar */
-}
-
-.inap-card::before { /* Efek Overlay */
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(85, 168, 110, 0.2); /* Overlay hijau transparan */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.inap-card:hover::before {
-    opacity: 1;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .inap-card img {
     width: 100%;
-    height: 180px;
+    height: 150px;
     object-fit: cover;
     display: block;
-    transition: opacity 0.3s;
 }
 
 .inap-card span {
     display: block;
-    text-align: center;
     padding: 10px;
     font-weight: bold;
     color: var(--primary-color);
-    background-color: var(--tertiary-color);
+}
+
+.nebulizer-container {
     position: relative;
-    z-index: 2;
+    width: 200px;
+    height: 300px;
+    margin: auto;
+    /* Tambahkan gaya lain untuk tampilan wadah jika perlu */
 }
 
-/* --- Dokter Section --- */
-.dokter-section {
-    background-color: #fcfcfc; /* Warna latar belakang sedikit berbeda */
-}
-
+/* --- Dokter Section (Grid Rapi + Hidden) --- */
 .dokter-grid {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
-/* Kontainer Dokter Tambahan (di-toggle oleh JS) */
 .dokter-grid-hidden {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    flex-wrap: wrap;
-    max-height: 0; /* Awalnya tersembunyi */
     overflow: hidden;
-    transition: max-height 0.8s ease-in-out;
-    margin-top: 20px;
+    max-height: 0; /* Awalnya tersembunyi */
+    transition: max-height 0.8s ease-in-out; /* Transisi untuk 'Lihat Lainnya' */
+    margin-top: 30px;
 }
 
 .dokter-grid-hidden.expanded {
-    max-height: 2000px; /* Nilai besar agar konten terlihat saat expanded */
-    margin-bottom: 20px;
+    max-height: 2000px; /* Cukup besar untuk menampung konten */
 }
 
 .dokter-card {
-    text-align: center;
     background-color: var(--text-light);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 250px;
-    transition: all 0.3s ease;
-}
-
-.dokter-card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
 }
 
 .dokter-card img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
-    border: 3px solid var(--primary-color);
-    margin-bottom: 10px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid var(--secondary-color);
 }
 
 .dokter-card h4 {
-    margin: 5px 0;
-    color: var(--primary-color);
+    margin-bottom: 5px;
+    color: var(--text-dark);
 }
 
 .dokter-card p {
-    font-style: italic;
-    color: #666;
-    margin-bottom: 10px; /* Diperkecil karena ada jadwal */
-}
-
-/* Gaya Khusus untuk Informasi Jadwal */
-.jadwal-info {
-    font-size: 0.9em; 
-    color: var(--primary-color); 
-    font-weight: bold;
-    margin-bottom: 15px !important; /* Pastikan menimpa margin p normal */
-    font-style: normal !important;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 .dokter-card button {
-    background-color: var(--secondary-color);
+    background: none;
+    border: 1px solid var(--primary-color);
     color: var(--primary-color);
-    border: none;
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 20px;
+    margin-top: 10px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all var(--transition-speed);
 }
 
 .dokter-card button:hover {
-    background-color: #92d4a5;
+    background-color: var(--primary-color);
+    color: var(--text-light);
 }
 
-/* --- Galeri & Lokasi --- */
+
+/* --- Galeri Section --- */
+.galeri-section {
+    background-color: var(--tertiary-color);
+}
+
 .virtual-tour-box {
-    text-align: center;
-    margin-bottom: 30px;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .video-placeholder {
     position: relative;
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    height: 400px; /* Ukuran placeholder */
 }
 
 .video-placeholder img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    object-fit: cover;
 }
 
 .view-options {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    display: flex;
-    gap: 10px;
-}
-
-.view-options span {
-    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--text-light);
     padding: 5px 10px;
     border-radius: 5px;
-    font-weight: bold;
-    color: var(--primary-color);
-    cursor: pointer;
+    font-size: 0.9em;
 }
 
 .galeri-mini-grid {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
     flex-wrap: wrap;
-    padding-top: 15px;
 }
 
 .galeri-item {
-    max-width: 200px;
-    text-align: center;
+    flex: 1 1 30%; /* 3 item per baris */
+    max-width: 350px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .galeri-item img {
     width: 100%;
-    height: 120px;
+    height: 200px;
     object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid var(--secondary-color);
-    transition: transform 0.3s;
 }
 
-.galeri-item img:hover {
-    transform: scale(1.05);
+.galeri-item p {
+    padding: 10px;
+    background-color: var(--text-light);
+    font-weight: 500;
 }
 
-/* Lokasi */
-.alamat {
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 10px;
-    font-size: 1.1em;
+/* --- Lokasi Section --- */
+.lokasi-section .alamat {
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    font-weight: 500;
 }
 
 .map-box {
-    position: relative;
     max-width: 800px;
-    margin: 20px auto 0;
-    border-radius: 10px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .map-box iframe {
+    width: 100%;
+    height: 400px;
     display: block;
-    width: 100%; /* Memastikan iframe map responsif */
-    height: 400px; /* Tinggi disesuaikan */
 }
 
 .btn-map {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 10;
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none; 
+    display: block;
+    padding: 15px;
+    background-color: #3498db;
+    color: var(--text-light) !important;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color var(--transition-speed);
 }
 
-/* --- Floating Footer Bar (Mobile-style bottom bar) --- */
+.btn-map:hover {
+    background-color: #2980b9;
+}
+
+
+/* --- Floating Footer --- */
 .floating-footer {
+    display: flex;
+    justify-content: space-around;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     background-color: var(--primary-color);
-    display: flex;
-    justify-content: space-around;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
     padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 100;
+    z-index: 900;
+    /* Tambahkan margin-bottom pada body agar tidak tertutup footer */
+}
+
+body {
+    margin-bottom: 60px; /* Tinggi footer */
 }
 
 .footer-item {
+    color: var(--text-light);
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-decoration: none;
-    color: var(--text-light);
     font-size: 0.8em;
-    transition: color 0.2s;
+    font-weight: 500;
+    transition: color var(--transition-speed);
 }
 
 .footer-item i {
-    font-size: 1.5em;
-    margin-bottom: 3px;
+    font-size: 1.2em;
+    margin-bottom: 5px;
 }
 
 .footer-item:hover {
     color: var(--secondary-color);
 }
 
-/* --- Animasi & Transisi (CSS-only) --- */
+
+/* --- Form Pendaftaran Khusus --- */
+.form-page-body {
+    background-color: var(--tertiary-color);
+    margin-bottom: 0 !important; /* Hapus margin body di halaman form */
+}
+.form-container {
+    max-width: 700px; 
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    background-color: var(--text-light);
+    animation: fadeIn 0.5s ease-out;
+}
+.form-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    text-align: center;
+}
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(85, 168, 110, 0.5);
+    outline: none;
+}
+.checkbox-group {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 5px;
+    background-color: var(--tertiary-color);
+    display: flex; /* Menggunakan Flexbox untuk Checkbox */
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-weight: normal;
+}
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+    transform: scale(1.1);
+}
+
+.submit-btn {
+    padding: 15px 20px;
+    font-size: 1.2em;
+}
+
+/* Header Halaman Form */
+.form-page-body .header {
+    justify-content: space-between;
+}
+.emergency-button {
+    background-color: #3498db;
+    color: var(--text-light);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.emergency-button:hover {
+    background-color: #2980b9;
+}
+
+
+/* --- Animasi & Transisi --- */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(20px);
@@ -572,7 +626,6 @@ h2, h3, h4 {
     transform: translateY(0);
 }
 
-/* Keyframe untuk Dropdown */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -584,7 +637,7 @@ h2, h3, h4 {
     }
 }
 
-/* Responsif Dasar */
+/* --- Responsif (Max-width 768px) --- */
 .menu-toggle {
     display: none;
     background: none;
@@ -594,97 +647,118 @@ h2, h3, h4 {
     cursor: pointer;
 }
 
+@media (max-width: 1024px) {
+    .layanan-grid span {
+        flex: 1 1 calc(33.33% - 10px); /* 3 kolom di tablet besar */
+    }
+}
+
 @media (max-width: 768px) {
     /* Penyesuaian Header Mobile */
     .header {
-        padding: 10px 15px; /* Padding sedikit lebih kecil */
+        padding: 10px 15px;
     }
-
     .logo span {
-        font-size: 1em; /* Ukuran font logo lebih kecil di mobile */
+        font-size: 0.9em;
     }
 
-    .navbar {
-        display: none; /* Disembunyikan secara default, di-toggle oleh JS */
+    /* KONTROL MENU MOBILE */
+    .nav-wrapper {
+        display: none; 
         flex-direction: column;
         position: absolute;
-        top: 60px;
+        top: 60px; 
         right: 0;
         width: 100%;
         background-color: var(--text-light);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        gap: 0;
+        border-top: 1px solid var(--secondary-color);
     }
-
-    .navbar.active {
+    .nav-wrapper.active {
         display: flex;
     }
-
-    .navbar a, .dropdown {
+    .navbar {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        padding: 0;
+    }
+    .nav-item, .dropdown {
         width: 100%;
         text-align: left;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border-bottom: 1px solid var(--tertiary-color);
+        margin: 0;
+        border-radius: 0;
     }
-
-    /* Penyesuaian Tombol Daftar di Navigasi Mobile */
     .btn-daftar-nav {
-        margin: 10px 0; 
-        width: 90%; 
+        display: block;
+        width: 90%;
         text-align: center;
-        margin-left: 5%; 
+        margin: 15px auto; 
+        padding: 10px 20px !important;
+        border-radius: 5px;
+        box-shadow: none; 
     }
-
     .dropdown-content {
         position: static;
         width: 100%;
         box-shadow: none;
         padding-left: 20px;
+        border-top: none;
     }
-
     .menu-toggle {
         display: block;
     }
 
+    /* Penyesuaian Section */
+    section {
+        padding: 40px 0;
+    }
+    .hospital-main-image { 
+        height: 300px; 
+    }
     .unggulan-grid {
         flex-direction: column;
+        gap: 20px;
     }
-
-    /* Optimasi Fasilitas Layanan di Mobile (3 kolom) */
-    .layanan-grid span {
-        flex-basis: calc(33.33% - 10px); /* Tiga kolom di mobile */
-        font-size: 0.9em;
-        padding: 8px;
+    .unggulan-item {
+        max-width: 90%;
+        margin: 0 auto;
     }
-    
-    .hospital-main-image {
+    .layanan-grid span { 
+        flex: 1 1 calc(50% - 10px); /* 2 kolom di mobile */
+        min-width: 0;
+        font-size: 0.9em; 
+    }
+    .rawat-inap-grid { 
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+    }
+    .video-placeholder {
         height: 250px;
     }
-
-    .rawat-inap-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ukuran kartu lebih kecil */
-    }
-
     .galeri-mini-grid {
         gap: 10px;
     }
-
     .galeri-item {
-        max-width: 45%; /* Dua kartu per baris */
+        flex: 1 1 45%; 
+        max-width: none;
+    }
+    .galeri-item img {
+        height: 150px;
     }
 }
 
 @media (max-width: 480px) {
-    /* Optimasi Fasilitas Layanan di Smartphone Kecil (2 kolom) */
-    .layanan-grid span {
-        flex-basis: calc(50% - 10px); /* Dua kolom di smartphone sangat kecil */
-        font-size: 0.85em;
+    .layanan-grid span { 
+        flex: 1 1 100%; /* 1 kolom di mobile kecil */
     }
-
-    .rawat-inap-grid {
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+    .rawat-inap-grid { 
+        grid-template-columns: repeat(2, 1fr); 
     }
-    
-    .unggulan-item {
-        padding: 20px 15px;
+    .galeri-item {
+        flex: 1 1 100%; 
     }
 }
