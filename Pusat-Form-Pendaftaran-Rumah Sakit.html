@@ -6,85 +6,7 @@
     <title>Pendaftaran Online RSU Karina Medika</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Gaya Khusus Halaman Form (Disederhanakan untuk Form) */
-        .form-page-body {
-            background-color: var(--tertiary-color);
-        }
-        .form-container {
-            max-width: 700px; /* Lebar lebih besar untuk form */
-            margin: 50px auto;
-            padding: 30px;
-            border: 1px solid var(--secondary-color);
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            background-color: var(--text-light);
-            animation: fadeIn 0.5s ease-out;
-        }
-        .form-container h2 {
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            font-size: 1em;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 5px rgba(85, 168, 110, 0.5);
-            outline: none;
-        }
-        /* Gaya untuk Checkbox Group */
-        .checkbox-group {
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 5px;
-            background-color: var(--tertiary-color);
-        }
-        .checkbox-group label {
-            display: inline-block;
-            margin-right: 15px;
-            font-weight: normal;
-        }
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin-right: 5px;
-            transform: scale(1.1);
-        }
-        
-        .submit-btn {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 15px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
-            width: 100%;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        .submit-btn:hover {
-            background-color: #438f5a;
-            transform: translateY(-2px);
-        }
-    </style>
-</head>
+    </head>
 <body class="form-page-body">
     
     <header class="header" style="position: relative;">
@@ -92,7 +14,7 @@
             <img src="LOGO NEW.png" alt="Logo RSU Karina Medika">
             <span>RSU KARINA MEDIKA</span>
         </div>
-        <a href="index.html" class="emergency-button" style="background-color: #3498db;">Kembali ke Utama</a>
+        <a href="index.html" class="emergency-button">Kembali ke Utama</a> 
     </header>
 
     <main>
@@ -107,7 +29,7 @@
                 
                 <div class="form-group">
                     <label for="nik">NIK (Nomor Induk Kependudukan)</label>
-                    <input type="number" id="nik" name="nik" placeholder="Masukkan 16 digit NIK Anda" required minlength="16" maxlength="16">
+                    <input type="text" id="nik" name="nik" placeholder="Masukkan 16 digit NIK Anda" required pattern="[0-9]{16}" minlength="16" maxlength="16" title="NIK harus 16 digit angka">
                 </div>
 
                 <div class="form-group">
@@ -159,17 +81,11 @@
                     <textarea id="keluhan" name="keluhan" rows="4"></textarea>
                 </div>
                 
-                <button type="button" class="submit-btn" id="submitBtn">Kirim Pendaftaran via WhatsApp</button>
+                <button type="button" class="btn-daftar-nav">Kirim Pendaftaran via WhatsApp</button>
             </form>
         </div>
     </main>
-
-    <footer class="floating-footer">
-        <a href="index.html#dokter" class="footer-item"><i class="fas fa-user-md"></i> Dokter</a>
-        <a href="#" class="footer-item emergency-trigger"><i class="fas fa-headset"></i> Emergency</a>
-        <a href="https://web.whatsapp.com/send/?phone=082261977771&text&type=phone_number&app_absent=0" class="footer-item" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-    </footer>
-
+    
     <script>
         document.getElementById('submitBtn').addEventListener('click', function() {
             // Ambil nilai dari form
@@ -185,10 +101,14 @@
             let tipeKunjungan = Array.from(checkboxes).map(cb => cb.value).join(', ');
             tipeKunjungan = tipeKunjungan || "Tidak Dipilih";
 
-            // Validasi input wajib
+            // Validasi input wajib & NIK 16 digit
             if (!nama || !nik || !faskes || !poli || !tanggal) {
-                alert("Mohon lengkapi semua kolom wajib (Nama, NIK, Faskes, Poliklinik, dan Tanggal Kunjungan).");
+                alert("Mohon lengkapi semua kolom wajib.");
                 return;
+            }
+            if (nik.length !== 16 || !/^\d+$/.test(nik)) {
+                 alert("NIK harus berupa 16 digit angka.");
+                 return;
             }
 
             // Format Pesan WhatsApp
@@ -204,14 +124,14 @@
                 `Keluhan Singkat: ${keluhan}%0A%0A` +
                 `_Mohon tunggu konfirmasi dari petugas kami._`;
 
-            // Perbaikan: Nomor Tujuan WhatsApp Disesuaikan dengan Floating Footer
-            const phoneNumber = '082261977771'; // Nomor baru: 082261977771
+            // Nomor Tujuan WhatsApp
+            const phoneNumber = '6282261977771'; // Menggunakan format internasional (62)
 
             // Buat link WhatsApp
-            const waLink = `https://wa.me/${phoneNumber}?text=${message}`;
+            const waLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
             // Arahkan ke WhatsApp
-            window.open(waLink);
+            window.open(waLink, '_blank');
         });
     </script>
 </body>
