@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+                // HANYA unobserve jika elemen bukan bagian dari konten dinamis (opsional)
+                // observer.unobserve(entry.target); 
             }
         });
     }, {
@@ -67,16 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 4. Logic "Lihat Lainnya" Dokter ---
-    const btnLihatLain = document.getElementById('lihat-dokter-lain');
-    const dokterLainnyaContainer = document.getElementById('dokter-lainnya');
+    // --- 4. Logic "Lihat Lainnya" Dokter (Diperbaiki) ---
+    // Menggunakan ID yang benar dari HTML: btn-lihat-dokter-lainnya dan dokter-tambahan-container
+    const btnLihatLain = document.getElementById('btn-lihat-dokter-lainnya');
+    const dokterTambahanContainer = document.getElementById('dokter-tambahan-container');
     
     // Data tambahan telah dirapikan (menghapus koma berlebihan)
     const additionalDoctors = [
         {
             img: "dr rudi.png", 
             nama: "dr. R.Rudi Ruhikmat, Sp.B",
-            spesialisasi: "Spesialis Bedag",
+            spesialisasi: "Spesialis Bedah",
             jadwal: "Senin-Jum'at"
         },
         {
@@ -99,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    if (btnLihatLain && dokterLainnyaContainer) {
+    if (btnLihatLain && dokterTambahanContainer) {
         // Fungsi untuk membuat HTML card dokter
         const createDoctorCard = (dokter) => {
             return `
@@ -114,18 +116,25 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         btnLihatLain.addEventListener('click', () => {
-            const isExpanded = dokterLainnyaContainer.classList.toggle('expanded');
+            // Menggunakan variabel kontainer yang sudah diperbaiki
+            const isExpanded = dokterTambahanContainer.classList.toggle('expanded');
             
             if (isExpanded) {
                 // Isi Kontainer Dokter Tambahan
                 let htmlContent = additionalDoctors.map(createDoctorCard).join('');
-                dokterLainnyaContainer.innerHTML = htmlContent;
+                dokterTambahanContainer.innerHTML = htmlContent;
                 btnLihatLain.innerHTML = "Sembunyikan Dokter"; 
+                
+                 // Mengamati elemen baru agar animasi 'animate-on-scroll' bekerja
+                 dokterTambahanContainer.querySelectorAll('.animate-on-scroll').forEach(section => {
+                    observer.observe(section);
+                });
+
             } else {
                 btnLihatLain.innerHTML = "Lihat Dokter Lainnya"; 
                 // Konten hilang setelah transisi CSS (800ms)
                 setTimeout(() => {
-                     dokterLainnyaContainer.innerHTML = '';
+                     dokterTambahanContainer.innerHTML = '';
                 }, 800); 
             }
         });
